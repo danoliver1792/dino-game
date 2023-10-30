@@ -2,6 +2,7 @@
 const dino = document.querySelector(".dino");
 const background = document.querySelector(".background");
 let isJumping = false;
+let position = 0;
 
 // identificando quando o usuário pressionou "space"
 function handleKeyUp(event) {
@@ -14,7 +15,6 @@ function handleKeyUp(event) {
 
 // programando o pulo do dino com espaço
 function jump() {
-    let position = 0;
 
     isJumping = true;
 
@@ -54,15 +54,19 @@ function createCactus() {
 
     let leftInterval = setInterval(() => {
         // movendo os cactus para esquerda
-        cactusPosition -= 10;
+        cactusPosition -= 5;
         cactus.style.left = cactusPosition + "px";
 
         // fazendo os cactus desaparecer ao chegar no limite da tela
         if (cactusPosition < -60) {
             clearInterval(leftInterval);
             background.removeChild(cactus);
+        } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
+            // Game Over
+            clearInterval(leftInterval);
+            document.body.innerHTML = "<h1 class='game-over'>Fim de Jogo</h1>"
         } else {
-            cactusPosition -= 10;
+            cactusPosition -= 5;
             cactus.style.left = cactusPosition + "px";
         }
     }, 20);
