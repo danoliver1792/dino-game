@@ -46,10 +46,29 @@ function createCactus() {
     // gerando HTML novos
     const cactus = document.createElement("div");
     let cactusPosition = 1000;
+    let randomTime = Math.random() * 6000;
 
     cactus.classList.add("cactus");
     cactus.style.left = 1000 + "px";
     background.appendChild(cactus);
+
+    let leftInterval = setInterval(() => {
+        // movendo os cactus para esquerda
+        cactusPosition -= 10;
+        cactus.style.left = cactusPosition + "px";
+
+        // fazendo os cactus desaparecer ao chegar no limite da tela
+        if (cactusPosition < -60) {
+            clearInterval(leftInterval);
+            background.removeChild(cactus);
+        } else {
+            cactusPosition -= 10;
+            cactus.style.left = cactusPosition + "px";
+        }
+    }, 20);
+
+    // gerando novos cactus
+    setTimeout(createCactus, randomTime);
 }
 
 createCactus();
