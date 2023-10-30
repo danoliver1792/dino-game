@@ -1,5 +1,6 @@
 // selecionando o dinossauro
 const dino = document.querySelector(".dino");
+const background = document.querySelector(".background");
 let isJumping = false;
 
 // identificando quando o usuário pressionou "space"
@@ -39,5 +40,18 @@ function jump() {
 
     }, 20);
 }
+
+// gerando os cactus
+function createCactus() {
+    // gerando HTML novos
+    const cactus = document.createElement("div");
+    let cactusPosition = 1000;
+
+    cactus.classList.add("cactus");
+    cactus.style.left = 1000 + "px";
+    background.appendChild(cactus);
+}
+
+createCactus();
 
 document.addEventListener("keyup", handleKeyUp);
